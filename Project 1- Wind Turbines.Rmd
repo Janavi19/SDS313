@@ -40,7 +40,7 @@ Efforts made from national Energy and Turbine Associations provide a regularly u
 
 # Uni-Variant Distribution of Electrical Generation Turbine Capacity #
 
-It's important to first analyze the following histogram which illustrates the Uni-variant Distribution of the Electrical Generation Capacity of the Turbine measured in KW (kilo-watts). Some key and relevant statistics include the mean which is `r mean(wind$Turbine.Capacity)`, the median which is `r median(wind$Turbine.Capacity)`, and the standard deviation which is, `r sd(wind$Turbine.Capacity)`.  
+It's important to first analyze the following histogram which illustrates the Uni-variant Distribution of the Electrical Generation Capacity of the Turbine measured in KW (kilo-watts). Some key and relevant statistics include the mean which is `r mean(wind$Turbine.Capacity)`, the median which is `r median(wind$Turbine.Capacity)`, and the standard deviation which is, `r mean(wind$Turbine.Capacity)`.  
 
 
 ```{r, echo= FALSE}
