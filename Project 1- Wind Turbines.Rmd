@@ -46,7 +46,7 @@ It's important to first analyze the following histogram which illustrates the Un
 ```{r, echo= FALSE}
 wind$Turbine.Capacity = round((wind$Turbine.Capacity)*100000,2)
 wind_ggplot <- ggplot(wind)
-wind_ggplot + geom_histogram(aes(x=Turbine.Capacity), bins = 25, fill="magenta", col="white") + labs(title="Electrical Generation Capacity of Turbines", x="Electrical Generation Capacity of Turbines measured in KW (kilo-watts)",y="Count")
+wind_ggplot + geom_histogram(aes(x=Turbine.Capacity), bins = 25, fill="magenta", col="orange") + labs(title="Electrical Generation Capacity of Turbines", x="Electrical Generation Capacity of Turbines measured in KW (kilo-watts)",y="Count")
 ```
 
 # Bi-Variant Distribution between Generation Capacity of Turbines and 3 Predictors #
