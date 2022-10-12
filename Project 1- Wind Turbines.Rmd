@@ -1,0 +1,97 @@
+---
+title: 'Project 1- Wind Turbines'
+author: "Janavi Kolpekwar"
+date: "2022-09-19"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+  pdf_document:
+    toc: yes
+    toc_float: yes
+---
+
+```{r global_options, echo=FALSE}
+knitr::opts_chunk$set(fig.height=5, fig.width=6, warning=FALSE, tidy=TRUE, tidy.opts=list(width.cutoff=60))
+```
+
+```{r setup, include=FALSE}
+setwd("~/Documents/UT Austin/1st Year Classes /SDS 313")
+wind <- read.csv('Project1_wind_turbines.csv')
+library(ggplot2)
+library(RColorBrewer)
+library(knitr)
+```
+
+
+# Introduction #
+
+The data provided below are specific technical locations of current and legacy of United States Wind Turbines, specifically Utility-Scale turbines responsible for generating power and supplying utility energy. A single data set was merged from Turbine companies including the Federal Aviation Administration's (FAA) Digital Obstacle File (DOF) and Obstruction Evaluation Airport Airspace Analysis (OE-AAA), the American Clean Power Association (ACP), Lawrence Berkeley National Laboratory (LBNL), and the United States Geological Survey (USGS).
+
+Efforts made from national Energy and Turbine Associations provide a regularly updated and spatially referenced national data set. Hence, the following data analyzes the uni variant distribution of Electrical Generational Capacity of Turbines followed by scatter plots of 3 possible predictors for the outcome of Electrical Generational Capacity of Turbines: 
+
+1) Diameter in Meters of the Turbine's Rotor
+2) The Area Swept on each Rotation of the Turbine
+3) Height in Meters of the Turbine's Hub. 
+
+# The United States Wind Turbine Database #
+![](windSbGraphic.jpg)
+
+
+# Uni-Variant Distribution of Electrical Generation Turbine Capacity #
+
+It's important to first analyze the following histogram which illustrates the Uni-variant Distribution of the Electrical Generation Capacity of the Turbine measured in KW (kilo-watts). Some key and relevant statistics include the mean which is `r mean(wind$Turbine.Capacity)`, the median which is `r median(wind$Turbine.Capacity)`, and the standard deviation which is, `r sd(wind$Turbine.Capacity)`.  
+
+
+```{r, echo= FALSE}
+wind$Turbine.Capacity = round((wind$Turbine.Capacity)*100000,2)
+wind_ggplot <- ggplot(wind)
+wind_ggplot + geom_histogram(aes(x=Turbine.Capacity), bins = 25, fill="magenta", col="white") + labs(title="Electrical Generation Capacity of Turbines", x="Electrical Generation Capacity of Turbines measured in KW (kilo-watts)",y="Count")
+```
+
+# Bi-Variant Distribution between Generation Capacity of Turbines and 3 Predictors #
+
+
+Below is scatter plot which illustrates the correlation between the Generational Capacity of a Turbine in kilo-watts(kw) and the Diameter in Meters of the Turbine's Rotor. The correlation value which is `r cor(wind$Turbine.Rotor_Diameter, wind$Turbine.Capacity)` reveals a positive and increasing correlation between the Diameter of the Turbine Rotor and the Generation Capacity of a Turbine. Additionally, the scatter plot reveals a heavier concentration of Turbine Capacity at 2e+23kw and 120m, resonating the histogram depicting the Uni-Variant distribution of Electrical Generation Capacity of Wind Turbines with a heavier count of in 2e+23 kw. 
+
+```{r, echo= FALSE}
+ggplot_3 <- ggplot(wind)
+ggplot_3 + geom_point(aes(x = Turbine.Rotor_Diameter, y = Turbine.Capacity), col = "turquoise")+ labs( title = "Graph 1", x = "Diameter of the Turbine's Rotor in Meters (m)" , y = "Turbine Capacity measured in KW (kilo-watts)")
+```
+
+
+Below is scatter plot which illustrates the correlation between the Generational Capacity of a Turbine in kilo-watts(kw) and the Area Swept on each Rotation of the Turbine. The correlation value which is `r cor(wind$Turbine.Swept_Area, wind$Turbine.Capacity)` reveals a positive and increasing correlation between the Area Swept on each Rotation of the Turbine and the Generation Capacity of a Turbine. Additionally, the scatter plot reveals a heavier concentration of Turbine Capacity at 2e+23kw and swept area of 5,000-10,000, resonating the histogram depicting the Uni-Variant distribution of Electrical Generation Capacity of Wind Turbines with a heavier count of in 2e+23 kw.
+
+
+```{r, echo= FALSE}
+ggplot_3 <- ggplot(wind)
+ggplot_3 + geom_point(aes(x = Turbine.Swept_Area, y = Turbine.Capacity), col = "purple")+ labs( title = "Graph 2", x = "The Area Swept on each Rotation of the Turbine" , y = "Turbine Capacity measured in KW (kilo-watts)")
+
+```
+
+Below is scatter plot which illustrates the correlation between the Generational Capacity of a Turbine in kilo-watts(kw) and the Area Swept on each Rotation of the Turbine. The correlation value which is `r cor(wind$Turbine.Hub_Height, wind$Turbine.Capacity)` reveals a positive and increasing correlation between the AHeight in Meters of the Turbine's Hub and the Generation Capacity of a Turbine. Additionally, the scatter plot reveals a heavier concentration of Turbine Capacity at 2e+23kw and 75m (respectively) height of Turbine's Hub, resonating the histogram depicting the Uni-Variant distribution of Electrical Generation Capacity of Wind Turbines with a heavier count of in 2e+23 kw.
+
+
+```{r echo= FALSE}
+ggplot_3 <- ggplot(wind)
+ggplot_3 + geom_point(aes(x = Turbine.Hub_Height, y = Turbine.Capacity), col = "red")+ labs( title = "Graph 3", x = "Height of the Turbine's Hub in meters(m)" , y = "Turbine Capacity measured in kilo-watts(kw)")
+
+```
+
+# Analysis # 
+
+After analyzing the uni-variant distribution of the Electrical Generational Capacity of Turbines and bi-variant distribution of 3 possible predictors for the Electrical Generational Capacity of Turbine Data, it can be concluded that a positive correlation exists with all 3 predictors, recognizing concentration in 2e+23 kilo-watts of Electrical Generation Capacity of a Turbine with all 3 predictor scatter plots. In addition to the positive increasing skew for each bi-variant scatter plot, the correlation value for each plot if greater than 0.5, revealing a strong positive correlation. As a result, the Diameter in Meters of the Turbine's Rotor, Area Swept on each Rotation of the Turbine, and Height in Meters of the Turbine's Hub are strong predictors of Electrical Generation Capacity of Turbines. 
+
+# Consideration for Geography in the Future? # 
+
+Although this report analyzes the uni variant distribution of Electrical Generational Capacity of Turbines followed by scatter plots of 3 possible predictors for the outcome of Electrical Generational Capacity of Turbines, another critical question comes into consideration: Does the geographical location of wind turbines increase of decrease it's electrical generation capacity? Some parts of the United States are off the coast and known to be a lot windier than inner grasslands. Hence, a follow-up question for Wind Turbine Engineers could be, what geographical locations will allow wind turbines to function at full potential and maximum electrical generation capacity? 
+
+
+# Sources #
+
+1)  Hoen, B.D., Diffendorfer, J.E., Rand, J.T., Kramer, L.A., Garrity, C.P., and Hunt, H.E., 2018, United States Wind Turbine Database (ver. 5.1, August 2022): U.S. Geological Survey, American Clean Power (ACP) Association, and Lawrence Berkeley National Laboratory data release, https://doi.org/10.5066/F7TX3DN0.
+
+2) (USGS), United States Geological Survey. “The United States Wind Turbine Database.” United States Geological Survey, 19 Apr. 2018, https://www.sciencebase.gov/catalog/item/6001e327d34e592d8671fae0. Accessed 22 Sept. 2022. 
+
+
+
