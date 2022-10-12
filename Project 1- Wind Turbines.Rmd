@@ -56,7 +56,7 @@ Below is scatter plot which illustrates the correlation between the Generational
 
 ```{r, echo= FALSE}
 ggplot_3 <- ggplot(wind)
-ggplot_3 + geom_point(aes(x = Turbine.Rotor_Diameter, y = Turbine.Capacity), col = "turquoise")+ labs( title = "Graph 1", x = "Diameter of the Turbine's Rotor in Meters (m)" , y = "Turbine Capacity measured in KW (kilo-watts)")
+ggplot_3 + geom_point(aes(x = Turbine.Rotor_Diameter, y = Turbine.Capacity), col = "aquamarine")+ labs( title = "Graph 1", x = "Diameter of the Turbine's Rotor in Meters (m)" , y = "Turbine Capacity measured in KW (kilo-watts)")
 ```
 
 
